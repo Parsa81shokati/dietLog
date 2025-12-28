@@ -8,23 +8,23 @@ export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
 
   await connectDB();
-  console.log("DB CONNECTED");
 
   const { email, password } = req.body;
   const user = await User.findOne({ email });
-  console.log("USER FOUND:", !!user);
+
   if (!user) return res.status(401).json({ error: "Invalid credentials" });
 
   const valid = await bcrypt.compare(password, user.password);
   if (!valid) return res.status(401).json({ error: "Invalid credentials" });
 
   const token = signToken({ userId: user._id });
-  console.log("ABOUT TO SET COOKIE");
+
+  const isDev = process.env.NODE_ENV !== "production";
   res.setHeader(
     "Set-Cookie",
-    `token=${token}; HttpOnly; Path=/; Max-Age=${
-      60 * 60 * 24 * 7
-    }; SameSite=Lax; Secure=${process.env.NODE_ENV === "production"}`
+    `token=${token}; HttpOnly; Path=/; Max-Age=${60 * 60 * 24 * 7}; SameSite=${
+      isDev ? "Lax" : "None"
+    }; ${isDev ? "" : "Secure"}`
   );
 
   res.status(200).json({
@@ -35,5 +35,4 @@ export default async function handler(req, res) {
       hasDiet: user.hasDiet,
     },
   });
-  console.log("LOGIN SUCCESS");
 }

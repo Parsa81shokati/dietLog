@@ -17,12 +17,12 @@ export default async function handler(req, res) {
 
   const user = await User.create({ email, password: hashed });
   const token = signToken({ userId: user._id });
-
+  const isDev = process.env.NODE_ENV !== "production";
   res.setHeader(
     "Set-Cookie",
-    `token=${token}; HttpOnly; Path=/; Max-Age=${
-      60 * 60 * 24 * 7
-    }; SameSite=Lax; Secure=${process.env.NODE_ENV === "production"}`
+    `token=${token}; HttpOnly; Path=/; Max-Age=${60 * 60 * 24 * 7}; SameSite=${
+      isDev ? "Lax" : "None"
+    }; ${isDev ? "" : "Secure"}`
   );
 
   res.status(201).json({
