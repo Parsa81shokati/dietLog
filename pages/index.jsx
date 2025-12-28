@@ -68,7 +68,7 @@ export default function AuthPage() {
         {/* Title */}
         <div className="text-center space-y-1">
           <h1 className="text-xl font-vazirmatn font-medium">
-            {isRegister ? "خوش اومدی 👋" : "خوش برگشتی 👋"}
+            {isRegister ? "خوش اومدی عزیزم 👋" : "خوش برگشتی 👋"}
           </h1>
 
           <p className="text-sm text-gray-500">
