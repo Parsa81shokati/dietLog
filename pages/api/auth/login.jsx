@@ -4,19 +4,22 @@ import { User } from "@/lib/models/User";
 import bcrypt from "bcryptjs";
 
 export default async function handler(req, res) {
+  console.log("LOGIN API HIT");
   if (req.method !== "POST") return res.status(405).end();
 
   await connectDB();
+  console.log("DB CONNECTED");
 
   const { email, password } = req.body;
   const user = await User.findOne({ email });
+  console.log("USER FOUND:", !!user);
   if (!user) return res.status(401).json({ error: "Invalid credentials" });
 
   const valid = await bcrypt.compare(password, user.password);
   if (!valid) return res.status(401).json({ error: "Invalid credentials" });
 
   const token = signToken({ userId: user._id });
-
+  console.log("ABOUT TO SET COOKIE");
   res.setHeader(
     "Set-Cookie",
     `token=${token}; HttpOnly; Path=/; Max-Age=${
@@ -32,4 +35,5 @@ export default async function handler(req, res) {
       hasDiet: user.hasDiet,
     },
   });
+  console.log("LOGIN SUCCESS");
 }
