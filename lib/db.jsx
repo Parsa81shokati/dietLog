@@ -14,7 +14,9 @@ export async function connectDB() {
     }
   }
   try {
-    const db = await mongoose.connect(process.env.MONGO_URI);
+    const db = await mongoose.connect(
+      "mongodb+srv://parsa:j7KR85r24rsdMnNf@diet.f6cpofy.mongodb.net/?appName=diet"
+    );
     console.log("new connection created");
     isConnected = db.connections[0].readyState === 1;
   } catch (error) {

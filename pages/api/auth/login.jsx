@@ -1,6 +1,6 @@
-import { connectDB } from "./../../../lib/db";
-import { signToken } from "../../../lib/jwt";
-import { User } from "../../../lib/models/User";
+import { connectDB } from "@/lib/db";
+import { signToken } from "@/lib/jwt";
+import { User } from "@/lib/models/User";
 import bcrypt from "bcryptjs";
 
 export default async function handler(req, res) {

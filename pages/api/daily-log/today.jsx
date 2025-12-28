@@ -1,10 +1,10 @@
-import { connectDB } from "../../../lib/db";
-import { calculateRemainingUnits, getUserDay } from "../../../lib/logic/logic";
+import { connectDB } from "@/lib/db";
+import { calculateRemainingUnits, getUserDay } from "@/lib/logic/logic";
 
-import { authMiddleware } from "../../../lib/middleware";
-import { DailyLog } from "../../../lib/models/DailyLog";
-import { User } from "../../../lib/models/User";
-import { UserDiet } from "../../../lib/models/UserDiet";
+import { authMiddleware } from "@/lib/middleware";
+import { DailyLog } from "@/lib/models/DailyLog";
+import { User } from "@/lib/models/User";
+import { UserDiet } from "@/lib/models/UserDiet";
 
 export default async function handler(req, res) {
   if (req.method !== "GET")
