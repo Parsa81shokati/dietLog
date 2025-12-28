@@ -1,9 +1,11 @@
 import FOOD_CATEGORIES from "@/lib/constants/categories";
 import { useState } from "react";
 import AddFoodModal from "./AddFoodModal";
+import { useRouter } from "next/router";
 
 export default function PrimaryActions({ onAddMeal }) {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <>

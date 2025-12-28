@@ -24,12 +24,7 @@ async function handler(req, res) {
       const diet = await UserDiet.findOneAndUpdate(
         { userId },
         { $set: { dailyLimits } },
-        {
-          upsert: true,
-          new: true,
-          runValidators: true,
-          rawResult: true,
-        }
+        { upsert: true, new: true, runValidators: true }
       );
 
       if (!existingDiet) {

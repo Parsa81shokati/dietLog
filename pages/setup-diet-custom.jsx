@@ -89,6 +89,9 @@ export default function SetupDietCustom() {
 
     await fetch("/api/diet", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       credentials: "include",
       body: JSON.stringify({ dailyLimits: limits }),
     });
