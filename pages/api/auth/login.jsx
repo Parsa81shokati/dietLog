@@ -19,6 +19,13 @@ export default async function handler(req, res) {
 
   const token = signToken({ userId: user._id });
 
+  res.setHeader(
+    "Set-Cookie",
+    `token=${token}; HttpOnly; Path=/; Max-Age=${
+      60 * 60 * 24 * 7
+    }; SameSite=None; Secure`
+  );
+
   res.status(200).json({
     token,
     user: {

@@ -18,7 +18,7 @@ export default function AuthPage() {
     const res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-
+      credentials: "include",
       body: JSON.stringify({ email, password }),
     });
 
@@ -28,9 +28,6 @@ export default function AuthPage() {
       alert(data.error || "خطا در ورود/ثبت نام");
       return;
     }
-
-    // ✅ ذخیره توکن
-    localStorage.setItem("token", data.token);
 
     if (!data.user.hasDiet) {
       router.replace("/setup-diet");
@@ -71,7 +68,7 @@ export default function AuthPage() {
         {/* Title */}
         <div className="text-center space-y-1">
           <h1 className="text-xl font-vazirmatn font-medium">
-            {isRegister ? "خوش اومدی عزیزم 👋" : "خوش برگشتی 👋"}
+            {isRegister ? "خوش اومدی  👋" : "خوش برگشتی 👋"}
           </h1>
 
           <p className="text-sm text-gray-500">
