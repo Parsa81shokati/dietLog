@@ -13,6 +13,7 @@ export default async function handler(req, res) {
   await connectDB();
 
   await authMiddleware(req, res);
+  if (!req.userId) return; // ✅ حیاتی
   const userId = req.userId;
 
   const user = await User.findById(userId);

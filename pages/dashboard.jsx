@@ -14,18 +14,29 @@ function Dashboard() {
 
   const { user, loading } = useAuth("/"); // redirect if not logged in
 
-  async function fetchDailyLog() {
-    const res = await fetch("/api/daily-log/today", {
-      credentials: "include",
-    });
-
-    const data = await res.json();
-    setLog(data);
-  }
-
   useEffect(() => {
+    if (!user) return;
+
+    async function fetchDailyLog() {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      const res = await fetch("/api/daily-log/today", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!res.ok) {
+        console.error("Failed to fetch daily log");
+        setLog(null);
+        return;
+      }
+
+      const data = await res.json();
+      setLog(data);
+    }
+
     fetchDailyLog();
-  }, []);
+  }, [user]);
 
   const message = log ? getSmartMessage(log, log.limits || {}) : null;
 

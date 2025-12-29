@@ -18,7 +18,7 @@ export default function AuthPage() {
     const res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      credentials: "include",
+
       body: JSON.stringify({ email, password }),
     });
 
@@ -28,6 +28,9 @@ export default function AuthPage() {
       alert(data.error || "خطا در ورود/ثبت نام");
       return;
     }
+
+    // ✅ ذخیره توکن
+    localStorage.setItem("token", data.token);
 
     if (!data.user.hasDiet) {
       router.replace("/setup-diet");

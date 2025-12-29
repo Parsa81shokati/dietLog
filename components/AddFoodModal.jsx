@@ -11,7 +11,12 @@ export default function AddFoodModal({ open, onClose }) {
 
   useEffect(() => {
     if (!open || foods.length) return;
-    fetch("/api/foods", { credentials: "include" })
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    fetch("/api/foods", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
       .then((res) => res.json())
       .then((data) => setFoods(data.foods));
   }, [open]);
@@ -38,8 +43,9 @@ export default function AddFoodModal({ open, onClose }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      credentials: "include",
+
       body: JSON.stringify({
         foodId: selectedFood._id,
         quantity: units,

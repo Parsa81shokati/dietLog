@@ -1,8 +1,13 @@
 import { verifyToken } from "./jwt";
 
 export async function authMiddleware(req, res) {
-  const token = req.cookies.token; // 👈 فقط از cookie
+  const authHeader = req.headers.authorization;
 
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  const token = authHeader.split(" ")[1];
   if (!token) {
     res.status(401).json({ error: "Unauthorized" });
     return;
