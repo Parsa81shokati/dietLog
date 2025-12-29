@@ -43,7 +43,7 @@ export default function MacroCard({
             strokeWidth={stroke}
             strokeDasharray={circumference + " " + circumference}
             strokeDashoffset={strokeDashoffset}
-            strokeLinecap="square"
+            strokeLinecap="round"
             r={normalizedRadius}
             cx={radius}
             cy={radius}

@@ -22,9 +22,16 @@ export default async function handler(req, res) {
 
   const date = getUserDay(new Date(), user);
 
-  const log = await DailyLog.findOne({ userId, date }).populate("foods.foodId");
+  let log = await DailyLog.findOne({ userId, date }).populate("foods.foodId");
 
-  if (!log) return res.status(200).json(null);
+  if (!log) {
+    log = await DailyLog.create({
+      userId,
+      date,
+      foods: [],
+      totals: {}, // defaults schema = صفر
+    });
+  }
 
   const diet = await UserDiet.findOne({ userId });
 

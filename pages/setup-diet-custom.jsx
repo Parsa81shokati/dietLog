@@ -10,6 +10,7 @@ const CATEGORIES = [
   { key: "fat", label: "چربی", icon: "🫒" },
   { key: "sugar", label: "قند", icon: "🍬" },
   { key: "vegetables", label: "سبزیجات", icon: "🥦" },
+  { key: "fruit", label: "میوه", icon: "🍎" },
 ];
 
 export default function SetupDietCustom() {
@@ -24,6 +25,7 @@ export default function SetupDietCustom() {
     fat: 0,
     sugar: 0,
     vegetables: 0,
+    fruit: 0,
   });
 
   const [initialLimits, setInitialLimits] = useState(null);

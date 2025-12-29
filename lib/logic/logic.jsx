@@ -25,7 +25,10 @@ async function startDailyLog(user) {
   return DailyLog.create({
     userId: user._id,
     date,
-  }); //اگر لاگ روزانه وجود ندارد، یک سند جدید ساخته می‌شود.
+    foods: [],
+    totals: {}, // 🔥 خیلی مهم
+  });
+  //اگر لاگ روزانه وجود ندارد، یک سند جدید ساخته می‌شود.
 }
 
 async function addFoodToDailyLog({ user, foodId, quantity }) {

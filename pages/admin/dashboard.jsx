@@ -70,8 +70,8 @@ function dashboard() {
           type="number"
           placeholder="اندازه serving"
           value={servingAmount}
-          min={0.01}
-          step={0.01}
+          min={0.1}
+          step={0.1}
           onChange={(e) => setServingAmount(parseFloat(e.target.value))}
           required
           className="p-2 border rounded"

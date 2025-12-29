@@ -40,7 +40,7 @@ function Dashboard() {
             onOpenSetup={() => setOpenSetup(true)}
           />
           <MacroGrid log={log} />
-          <PrimaryActions />
+          <PrimaryActions onSuccess={fetchDailyLog} />
           <MealsTimeline meals={log?.foods} />
           {message && <SmartMessage message={message} />}
           {openSetup && (

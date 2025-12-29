@@ -44,9 +44,7 @@ export function getSmartMessage(log, limits) {
   // 👌 نزدیک به اتمام
   const lowRemaining = Object.values(remaining).some((v) => v <= 2);
   if (lowRemaining) {
-    return `تقریباً به هدف رسیدی 👌 فقط ${getRemainingSummary(
-      remaining
-    )} مونده`;
+    return " عالی شروع کردی👌";
   }
 
   // 🌱 حالت نرمال

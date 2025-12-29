@@ -37,6 +37,12 @@ const CATEGORY_META = {
     strokeColor: "#ec4899",
     bgColor: "#fbcfe8",
   },
+  fruit: {
+    title: "میوه",
+    icon: "🍎",
+    strokeColor: "#f97316", // یا رنگ دلخواه
+    bgColor: "#fed7aa",
+  },
 };
 
 export default function MacroGrid({ log }) {

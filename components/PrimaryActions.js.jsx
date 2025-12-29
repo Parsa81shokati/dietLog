@@ -3,7 +3,7 @@ import { useState } from "react";
 import AddFoodModal from "./AddFoodModal";
 import { useRouter } from "next/router";
 
-export default function PrimaryActions({ onAddMeal }) {
+export default function PrimaryActions({ onSuccess }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
@@ -24,7 +24,11 @@ export default function PrimaryActions({ onAddMeal }) {
           📅 تاریخچه
         </button>
         <button className="bg-gray-100 px-4 rounded-xl">📊</button>
-        <AddFoodModal open={open} onClose={() => setOpen(false)} />
+        <AddFoodModal
+          open={open}
+          onClose={() => setOpen(false)}
+          onSuccess={onSuccess}
+        />
       </div>
     </>
   );

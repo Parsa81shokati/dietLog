@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function AddFoodModal({ open, onClose }) {
+export default function AddFoodModal({ open, onClose, onSuccess }) {
   const [foods, setFoods] = useState([]);
   const [query, setQuery] = useState("");
   const [selectedFood, setSelectedFood] = useState(null);
@@ -45,7 +45,9 @@ export default function AddFoodModal({ open, onClose }) {
         quantity: units,
       }),
     });
-
+    if (onSuccess) {
+      await onSuccess(); // 👈 رفرش دیتا
+    }
     setLoading(false);
     reset();
     onClose();

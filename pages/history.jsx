@@ -37,6 +37,12 @@ export default function MealHistory() {
   if (!history.length)
     return (
       <div className="text-center py-20 text-gray-500">
+        <button
+          onClick={() => router.back()}
+          className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center"
+        >
+          <IoArrowBackOutline className="text-green-800 text-2xl" />
+        </button>
         هنوز چیزی ثبت نکردی 🍽️
       </div>
     );
