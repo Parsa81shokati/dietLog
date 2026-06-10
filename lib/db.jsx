@@ -20,5 +20,6 @@ export async function connectDB() {
     isConnected = db.connections[0].readyState === 1;
   } catch (error) {
     console.log("database connection faild", error);
+    throw error;
   }
 }

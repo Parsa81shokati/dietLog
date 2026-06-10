@@ -1,15 +1,18 @@
 import { connectDB } from "@/lib/db";
 import { signToken } from "@/lib/jwt";
 import { User } from "@/lib/models/User";
+
 import bcrypt from "bcryptjs";
 
 export default async function handler(req, res) {
   console.log("LOGIN API HIT");
   if (req.method !== "POST") return res.status(405).end();
 
+  console.log(process.env.MONGO_URI);
   await connectDB();
 
   const { email, password } = req.body;
+
   const user = await User.findOne({ email });
 
   if (!user) return res.status(401).json({ error: "Invalid credentials" });
@@ -23,7 +26,7 @@ export default async function handler(req, res) {
     "Set-Cookie",
     `token=${token}; HttpOnly; Path=/; Max-Age=${
       60 * 60 * 24 * 7
-    }; SameSite=None; Secure`
+    }; SameSite=None; Secure`,
   );
 
   res.status(200).json({
